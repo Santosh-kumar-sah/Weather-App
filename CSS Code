@@ -1,0 +1,12 @@
+body {
+  background: linear-gradient(135deg, #74ABE2, #5563DE);
+  min-height: 100vh;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+#icon {
+  width: 100px;
+}
