@@ -1,0 +1,45 @@
+const apiKey = 'ce65140ce96564f6d5c3e5c52cda2187';
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+
+const cityInput = document.getElementById('cityInput');
+const searchButton = document.getElementById('searchButton');
+const errorMessage = document.getElementById('errorMessage');
+const weatherInfo = document.getElementById('weatherInfo');
+const icon = document.getElementById('icon');
+const cityName = document.getElementById('cityName');
+const temperature = document.getElementById('temperature');
+const description = document.getElementById('description');
+const wind = document.getElementById('wind');
+const humidity = document.getElementById('humidity');
+
+searchButton.addEventListener('click', () => {
+  const city = cityInput.value.trim();
+  if (city) {
+    fetchWeather(city);
+  }
+});
+
+async function fetchWeather(city) {
+  errorMessage.classList.add('d-none');
+  weatherInfo.classList.add('d-none');
+  try {
+    const resp = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
+    const data = await resp.json();
+    if (!resp.ok) {
+      throw new Error();
+    }
+    updateUI(data);
+  } catch {
+    errorMessage.classList.remove('d-none');
+  }
+}
+
+function updateUI(data) {
+  icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+  cityName.textContent = data.name;
+  temperature.textContent = `${Math.round(data.main.temp)}°C`;
+  description.textContent = data.weather[0].description;
+  wind.textContent = `Wind: ${data.wind.speed} m/s`;
+  humidity.textContent = `Humidity: ${data.main.humidity}%`;
+  weatherInfo.classList.remove('d-none');
+}
