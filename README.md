@@ -25,4 +25,4 @@ A simple and responsive **Weather App** built with **HTML, CSS, JavaScript**, an
 ## 📦 Installation
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/weather-app.git
+   git clone https://github.com/Santosh-Kumar-Sah/weather-app.git
